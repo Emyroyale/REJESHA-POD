@@ -37,10 +37,7 @@ function requireEnv(name: string): string {
   return value;
 }
 
-async function printifyFetch<T>(
-  path: string,
-  init?: RequestInit & { revalidate?: number }
-): Promise<T> {
+async function printifyFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const token = requireEnv("PRINTIFY_API_TOKEN");
   const res = await fetch(`${PRINTIFY_API_BASE}${path}`, {
     ...init,
@@ -49,7 +46,10 @@ async function printifyFetch<T>(
       "Content-Type": "application/json",
       ...init?.headers,
     },
-    next: init?.revalidate !== undefined ? { revalidate: init.revalidate } : undefined,
+    // Printify's product list payload regularly exceeds Next.js's 2MB data
+    // cache entry limit, so persistent revalidation isn't used here — each
+    // request fetches fresh (still deduped within a single render pass).
+    cache: "no-store",
   });
 
   if (!res.ok) {
@@ -62,22 +62,17 @@ async function printifyFetch<T>(
   return res.json() as Promise<T>;
 }
 
-/** Product catalog rarely changes; cache for 5 minutes. */
 export async function getProducts(): Promise<PrintifyProduct[]> {
   const shopId = requireEnv("PRINTIFY_SHOP_ID");
   const data = await printifyFetch<PrintifyProductsResponse>(
-    `/shops/${shopId}/products.json`,
-    { revalidate: 300 }
+    `/shops/${shopId}/products.json`
   );
   return data.data.filter((p) => p.visible);
 }
 
 export async function getProduct(productId: string): Promise<PrintifyProduct> {
   const shopId = requireEnv("PRINTIFY_SHOP_ID");
-  return printifyFetch<PrintifyProduct>(
-    `/shops/${shopId}/products/${productId}.json`,
-    { revalidate: 300 }
-  );
+  return printifyFetch<PrintifyProduct>(`/shops/${shopId}/products/${productId}.json`);
 }
 
 export type PrintifyOrderLineItem = {

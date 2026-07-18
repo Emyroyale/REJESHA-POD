@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images-api.printify.com",
       },
+      {
+        protocol: "https",
+        hostname: "*.printify.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.amazonaws.com",
+      },
     ],
   },
 };
