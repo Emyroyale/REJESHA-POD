@@ -21,6 +21,7 @@ export type PrintifyProduct = {
   images: PrintifyImage[];
   variants: PrintifyVariant[];
   visible: boolean;
+  tags: string[];
 };
 
 type PrintifyProductsResponse = {

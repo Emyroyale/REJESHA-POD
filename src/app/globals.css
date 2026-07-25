@@ -6,9 +6,12 @@
 
   --color-rejesha-black: #0a0a0a;
   --color-rejesha-red: #c8102e;
+  --color-rejesha-green: #006600;
   --color-rejesha-white: #ffffff;
   --color-rejesha-gray: #6b6b6b;
   --color-rejesha-line: #e5e5e5;
+  --color-rejesha-cream: #fdf6ec;
+  --color-rejesha-gold: #f0b429;
 }
 
 @theme inline {
@@ -16,9 +19,12 @@
   --color-foreground: var(--foreground);
   --color-rejesha-black: var(--color-rejesha-black);
   --color-rejesha-red: var(--color-rejesha-red);
+  --color-rejesha-green: var(--color-rejesha-green);
   --color-rejesha-white: var(--color-rejesha-white);
   --color-rejesha-gray: var(--color-rejesha-gray);
   --color-rejesha-line: var(--color-rejesha-line);
+  --color-rejesha-cream: var(--color-rejesha-cream);
+  --color-rejesha-gold: var(--color-rejesha-gold);
   --font-sans: var(--font-inter);
   --font-display: var(--font-archivo);
 }
@@ -33,6 +39,69 @@ body {
   font-family: var(--font-display), var(--font-sans), sans-serif;
 }
 
+.font-poppins {
+  font-family: var(--font-poppins), var(--font-sans), sans-serif;
+}
+
+.font-editorial {
+  font-family: var(--font-playfair), serif;
+}
+
+.font-mono-brand {
+  font-family: var(--font-space-mono), monospace;
+}
+
+.font-script {
+  font-family: var(--font-alex-brush), cursive;
+}
+
 .tracking-brand {
   letter-spacing: 0.18em;
+}
+
+@keyframes rj-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.rj-hero-bg {
+  background-size: 200% 200%;
+  animation: rj-gradient-shift 16s ease infinite;
+}
+
+@keyframes rj-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rj-fade-up {
+  opacity: 0;
+  animation: rj-fade-up 0.8s ease-out forwards;
+}
+
+.rj-fade-up-delay-1 { animation-delay: 0.15s; }
+.rj-fade-up-delay-2 { animation-delay: 0.3s; }
+.rj-fade-up-delay-3 { animation-delay: 0.45s; }
+
+@keyframes rj-line-grow {
+  from { width: 0; }
+  to { width: 2.5rem; }
+}
+
+.rj-accent-line {
+  animation: rj-line-grow 1s ease-out 0.6s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rj-hero-bg,
+  .rj-fade-up,
+  .rj-accent-line {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.rj-word-fade {
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }

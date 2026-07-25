@@ -1,0 +1,78 @@
+{
+  "slug": "moving-from-kenya-to-the-usa-complete-guide",
+  "title": "Moving from Kenya to the USA: Complete Guide",
+  "excerpt": "Visa options, paperwork, and what to expect in your first few months, a practical roadmap for Kenyans relocating to the US.",
+  "category": "relocation",
+  "body": [
+    {
+      "type": "paragraph",
+      "content": [
+        "Relocating from Kenya to the United States is a process that unfolds in stages, from choosing the right visa category, to gathering documents, to the months after you land when everyday life still feels unfamiliar. This guide walks through what that path actually looks like, drawing on the official process laid out by the U.S. government, so you can plan with fewer surprises."
+      ]
+    },
+    { "type": "heading", "text": "Choosing the Right Visa Category" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Most Kenyans move to the US through one of three main routes: a family-sponsored petition filed by a relative who is a US citizen or permanent resident, an employment-based visa sponsored by a US employer, or the Diversity Visa Lottery, which randomly selects a limited number of applicants from countries with historically low immigration to the US each year. Each category has its own eligibility rules, processing timelines, and paperwork, so the first real decision is figuring out which one actually applies to your situation."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        "The official process runs through USCIS and the ",
+        { "text": "U.S. Department of State's immigrant visa process", "href": "https://travel.state.gov/content/travel/en/us-visas/immigrate.html", "external": true },
+        ", which covers petition filing, National Visa Center (NVC) processing, and your consular interview step by step. Reading through that process before you start collecting documents will save you from redoing paperwork later, since requirements differ slightly depending on your visa category."
+      ]
+    },
+    { "type": "heading", "text": "Documents You'll Need to Gather" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Regardless of category, expect to assemble a similar core set of documents: a valid passport, birth certificate, police clearance certificates from every country you've lived in for an extended period, medical exam results from an approved panel physician, and financial evidence showing you or your sponsor can support yourself once you arrive. For family and employment petitions, you'll also need the original approval notice (Form I-797) once USCIS approves the underlying petition."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        "Small mistakes, like a name that doesn't match exactly across documents, or a police clearance that's expired by the time of your interview, are some of the most common reasons cases stall. Start gathering paperwork as early as possible and keep certified translations ready for anything not already in English."
+      ]
+    },
+    { "type": "heading", "text": "What the Timeline Actually Looks Like" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Once your petition is approved, budget several months for NVC processing and background checks before your consular interview is even scheduled. Family-based cases can take longer than employment-based ones depending on the specific category and visa bulletin movement, since demand in some family categories exceeds the annual number of visas available. Check current visa bulletin dates and processing times directly on ",
+        { "text": "USCIS.gov", "href": "https://www.uscis.gov", "external": true },
+        " before making any firm travel or moving plans, since timelines shift from month to month."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        "Once your interview is approved, you'll typically receive your visa within a couple of weeks, at which point you have a limited window to actually enter the US before the visa expires. This is the point where booking flights, arranging temporary housing, and shipping belongings all need to come together quickly."
+      ]
+    },
+    { "type": "heading", "text": "Settling In: The First Few Months" },
+    {
+      "type": "paragraph",
+      "content": [
+        "After you land, the early priorities are usually the same regardless of visa category: applying for a Social Security number, opening a US bank account, finding housing, and figuring out health insurance. Many new arrivals underestimate how long it takes for a Social Security card to arrive by mail, which can delay everything from a lease application to a phone plan, so it helps to apply as soon as you're eligible."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        "Two things tend to matter most emotionally in those first months: staying connected to family back home and getting your finances set up so you're not losing money on basic transfers. See our guide on ",
+        { "text": "how to send money home cheaply", "href": "/blog/how-kenyans-abroad-can-send-money-home-cheaply", "external": false },
+        ", and if home comforts matter to you early on, here's ",
+        { "text": "where to find Kenyan groceries abroad", "href": "/blog/where-to-buy-kenyan-food-abroad", "external": false },
+        " to make the adjustment a little easier."
+      ]
+    }
+  ],
+  "relatedSlugs": [
+    "how-kenyans-abroad-can-send-money-home-cheaply",
+    "where-to-buy-kenyan-food-abroad"
+  ]
+}

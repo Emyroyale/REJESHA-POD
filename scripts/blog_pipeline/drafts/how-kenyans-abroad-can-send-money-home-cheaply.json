@@ -1,0 +1,59 @@
+{
+  "slug": "how-kenyans-abroad-can-send-money-home-cheaply",
+  "title": "How Kenyans Abroad Can Send Money Home Cheaply",
+  "excerpt": "Comparing transfer fees, exchange rates, and delivery speed across the services Kenyans in the diaspora use most.",
+  "category": "money",
+  "body": [
+    {
+      "type": "paragraph",
+      "content": [
+        "For most Kenyans in the diaspora, sending money home isn't a one-time event, it's a recurring part of life, whether that's supporting parents, paying school fees, or helping with a family project. Because it happens so often, even a small difference in fees or exchange rates adds up fast over a year. Here's how to think about the main options."
+      ]
+    },
+    { "type": "heading", "text": "Why Fees Add Up Fast" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Transfer fees and exchange rate markups can quietly eat 3 to 8 percent of every remittance, depending on the provider and the payment method you use. That markup is often hidden inside the exchange rate itself rather than shown as a separate fee, which makes it easy to underestimate how much you're actually paying. Two providers advertising the same flat fee can still cost very differently once you account for the rate they use to convert dollars to shillings."
+      ]
+    },
+    { "type": "heading", "text": "Comparing the Main Transfer Options" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Services like ",
+        { "text": "Wise", "href": "https://wise.com", "external": true },
+        " publish their fees upfront and use the real mid-market exchange rate, which usually makes them cheaper for bank-to-M-Pesa transfers than a traditional wire from a US bank. The tradeoff is that transfers can take a bit longer to land compared to services built specifically for instant cash pickup."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        { "text": "Western Union", "href": "https://www.westernunion.com", "external": true },
+        " is worth comparing too, especially for cash pickup in areas without reliable mobile money access, or when you need funds to arrive within minutes rather than a day. Its network of physical agent locations across Kenya is one of its biggest advantages, even if the exchange rate isn't always the most competitive."
+      ]
+    },
+    { "type": "heading", "text": "Bank Transfers vs Mobile Money" },
+    {
+      "type": "paragraph",
+      "content": [
+        "A traditional international wire from a US bank is usually the slowest and most expensive route, often layering a flat fee on top of a weaker exchange rate, plus a possible receiving fee on the Kenyan side. Services that deposit directly into M-Pesa tend to be faster and cheaper for smaller, more frequent transfers, since the money is usable almost immediately without a trip to a bank branch."
+      ]
+    },
+    { "type": "heading", "text": "Tips to Cut Costs Every Time" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Compare the total amount the recipient actually gets, not just the advertised fee, since that's the only number that reflects the real exchange rate markup. Sending larger amounts less frequently, rather than many small transfers, also reduces how much you lose to flat fees over time. And if you're sending money to help family invest rather than just cover expenses, it's worth reading up on ",
+        { "text": "buying land in Kenya from abroad", "href": "/blog/buying-land-in-kenya-while-living-abroad", "external": false },
+        " before you wire a large sum, and revisiting our ",
+        { "text": "relocation guide", "href": "/blog/moving-from-kenya-to-the-usa-complete-guide", "external": false },
+        " if you're still early in your move and setting up US banking for the first time."
+      ]
+    }
+  ],
+  "relatedSlugs": [
+    "moving-from-kenya-to-the-usa-complete-guide",
+    "buying-land-in-kenya-while-living-abroad"
+  ]
+}

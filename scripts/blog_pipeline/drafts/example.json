@@ -1,0 +1,27 @@
+{
+  "slug": "example-post-slug",
+  "title": "Example Post Title",
+  "excerpt": "One or two sentences describing the post, shown on cards and in search results.",
+  "category": "money",
+  "body": [
+    { "type": "heading", "text": "First Section Heading" },
+    {
+      "type": "paragraph",
+      "content": [
+        "First paragraph, plain text with an inline outbound link: ",
+        { "text": "Wise", "href": "https://wise.com", "external": true },
+        "."
+      ]
+    },
+    { "type": "heading", "text": "Second Section Heading" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Second paragraph with an internal link to another post: ",
+        { "text": "read this related guide", "href": "/blog/moving-from-kenya-to-the-usa-complete-guide", "external": false },
+        "."
+      ]
+    }
+  ],
+  "relatedSlugs": ["moving-from-kenya-to-the-usa-complete-guide"]
+}

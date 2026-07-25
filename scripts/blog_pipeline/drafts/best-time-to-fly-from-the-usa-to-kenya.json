@@ -1,0 +1,54 @@
+{
+  "slug": "best-time-to-fly-from-the-usa-to-kenya",
+  "title": "Best Time to Fly from the USA to Kenya",
+  "excerpt": "Seasonal pricing patterns, layover routes, and how to time your trip home around the holidays without overpaying.",
+  "category": "travel",
+  "body": [
+    {
+      "type": "paragraph",
+      "content": [
+        "Flying between the US and Kenya is a long haul no matter which route you take, so getting the timing and routing right makes a real difference, both in cost and in how the trip actually feels. Here's how to think about when to book and which route to take."
+      ]
+    },
+    { "type": "heading", "text": "Peak vs Off-Peak Travel Seasons" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Fares from the US to Nairobi swing hardest around December and August, when diaspora travel peaks for the holidays and school breaks. That's also when Kenyan schools are on their longer holidays, so families traveling together tend to cluster around the same weeks, pushing prices up well before departure. If your travel dates are flexible, shifting by even a week or two outside these windows can mean a noticeably lower fare."
+      ]
+    },
+    { "type": "heading", "text": "Finding the Best Fares" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Tracking prices for a few weeks on ",
+        { "text": "Google Flights", "href": "https://www.google.com/travel/flights", "external": true },
+        " before booking usually surfaces the cheaper travel windows, since it shows how fares move across nearby dates rather than locking you into a single search. Booking a couple of months ahead generally beats booking last minute for this route, especially around the December peak when seats fill up early."
+      ]
+    },
+    { "type": "heading", "text": "Choosing Your Route" },
+    {
+      "type": "paragraph",
+      "content": [
+        "For direct options, check ",
+        { "text": "Kenya Airways", "href": "https://www.kenya-airways.com", "external": true },
+        ", which flies nonstop from New York JFK to Nairobi and connects to most other major Kenyan diaspora hubs through partner airlines. A one-stop itinerary through Europe or the Gulf is often cheaper than the direct route, but adds several hours to total travel time, so it's a real tradeoff between cost and how long you're actually in transit."
+      ]
+    },
+    { "type": "heading", "text": "Packing and Travel Tips" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Long-haul flights to Nairobi mean checked-bag allowances matter more than usual, especially if you're bringing gifts or supplies for family, so check your airline's baggage policy before you pack rather than at the counter. Planning a trip home is also a good time to stock up on essentials for family, or bring back a taste of home once you land. See our guide to ",
+        { "text": "where to buy Kenyan food abroad", "href": "/blog/where-to-buy-kenyan-food-abroad", "external": false },
+        " for the return trip, and, if this is your first visit back after relocating, our ",
+        { "text": "relocation guide", "href": "/blog/moving-from-kenya-to-the-usa-complete-guide", "external": false },
+        " covers the paperwork you'll want in order before you fly."
+      ]
+    }
+  ],
+  "relatedSlugs": [
+    "where-to-buy-kenyan-food-abroad",
+    "moving-from-kenya-to-the-usa-complete-guide"
+  ]
+}

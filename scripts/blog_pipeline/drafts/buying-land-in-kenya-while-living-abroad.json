@@ -1,0 +1,57 @@
+{
+  "slug": "buying-land-in-kenya-while-living-abroad",
+  "title": "Buying Land in Kenya While Living Abroad",
+  "excerpt": "How to vet a title deed, avoid common fraud schemes, and close a land purchase in Kenya from overseas.",
+  "category": "investing",
+  "body": [
+    {
+      "type": "paragraph",
+      "content": [
+        "Buying land in Kenya from overseas is one of the most common ways the diaspora invests back home, and also one of the easiest ways to lose money if you skip the verification steps. Distance makes it harder to spot red flags in person, so the process has to lean more heavily on documentation and trusted people on the ground."
+      ]
+    },
+    { "type": "heading", "text": "Start With a Title Search" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Every land purchase in Kenya should start with a search on ",
+        { "text": "Ardhisasa", "href": "https://ardhisasa.lands.go.ke/home", "external": true },
+        ", the Ministry of Lands' digital platform for title searches, transfers, and stamp duty. It's the fastest way to confirm a title deed is genuine, who actually owns the parcel, and whether there are any existing charges or disputes registered against it, before you send a single shilling as a deposit."
+      ]
+    },
+    { "type": "heading", "text": "Common Land Fraud Schemes to Avoid" },
+    {
+      "type": "paragraph",
+      "content": [
+        "The most common schemes involve a seller who isn't actually the registered owner, forged title documents, or the same parcel being sold to multiple buyers before any transfer is finalized. Distance makes diaspora buyers a frequent target, since fraudsters count on you not being able to easily visit the site or the lands office in person to double-check what you're being told."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        "For disputes or historical land injustices, the ",
+        { "text": "National Land Commission", "href": "https://landcommission.go.ke", "external": true },
+        " is the constitutional body with oversight of public land, and a useful resource if a deal looks even slightly irregular or if you need to research a parcel's history before committing."
+      ]
+    },
+    { "type": "heading", "text": "Working With a Lawyer and Power of Attorney" },
+    {
+      "type": "paragraph",
+      "content": [
+        "A local lawyer who isn't connected to the seller or agent is worth the cost, since they can independently verify the title, draft the sale agreement, and confirm the transfer is properly registered. If you can't be physically present for signing, a power of attorney lets a trusted representative act on your behalf, but it should be drafted specifically for the transaction rather than left open-ended, to limit what it actually authorizes."
+      ]
+    },
+    { "type": "heading", "text": "Closing the Deal From Abroad" },
+    {
+      "type": "paragraph",
+      "content": [
+        "Buying from abroad usually means moving a large sum at once, so it pays to revisit our guide on ",
+        { "text": "sending money home cheaply", "href": "/blog/how-kenyans-abroad-can-send-money-home-cheaply", "external": false },
+        " before you wire funds for a deposit or full payment, since the fees and exchange rate on a large transfer add up quickly. Only release full payment once the transfer is confirmed registered under your name, not simply once the seller says it's done."
+      ]
+    }
+  ],
+  "relatedSlugs": [
+    "how-kenyans-abroad-can-send-money-home-cheaply"
+  ]
+}
