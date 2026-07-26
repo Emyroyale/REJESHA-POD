@@ -108,7 +108,7 @@ export default async function BlogPostPage({
           </div>
         )}
 
-        <div className="font-editorial mt-10 space-y-6 text-lg leading-relaxed text-rejesha-black/90">
+        <div className="mt-10 space-y-6 text-lg leading-relaxed text-rejesha-black/90">
           {post.body.map((block, i) => (
             <Block key={i} block={block} index={i} />
           ))}
