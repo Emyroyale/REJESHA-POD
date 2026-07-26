@@ -12,6 +12,19 @@ export type PrintifyVariant = {
   price: number;
   is_enabled: boolean;
   is_default: boolean;
+  options?: number[];
+};
+
+export type PrintifyOptionValue = {
+  id: number;
+  title: string;
+  colors?: string[];
+};
+
+export type PrintifyOption = {
+  name: string;
+  type: string;
+  values: PrintifyOptionValue[];
 };
 
 export type PrintifyPlaceholderImage = {
@@ -44,6 +57,7 @@ export type PrintifyProduct = {
   blueprint_id?: number;
   print_provider_id?: number;
   print_areas?: PrintifyPrintArea[];
+  options?: PrintifyOption[];
 };
 
 type PrintifyProductsResponse = {
