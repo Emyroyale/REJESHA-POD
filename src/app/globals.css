@@ -26,7 +26,7 @@
   --color-rejesha-cream: var(--color-rejesha-cream);
   --color-rejesha-gold: var(--color-rejesha-gold);
   --font-sans: var(--font-inter);
-  --font-display: var(--font-archivo);
+  --font-display: var(--font-poppins);
 }
 
 body {
