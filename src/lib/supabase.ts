@@ -28,3 +28,16 @@ export type OrderRecord = {
   status: string;
   created_at?: string;
 };
+
+export type PersonalizationStatus = "draft" | "attached_to_cart" | "purchased";
+
+export type PersonalizationRecord = {
+  id: string;
+  product_id: string;
+  printify_upload_id: string;
+  preview_url: string;
+  configuration: unknown;
+  status: PersonalizationStatus;
+  created_at: string;
+  expires_at: string;
+};

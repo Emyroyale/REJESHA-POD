@@ -17,3 +17,19 @@ create index if not exists orders_stripe_session_id_idx on orders (stripe_sessio
 -- server-side code, so row-level security stays enabled with no public
 -- policies (service role bypasses RLS).
 alter table orders enable row level security;
+
+-- Holds an uploaded personalization (flattened design) until checkout
+-- validates and snapshots it into orders.line_items. The client only ever
+-- gets an opaque id back for this row, never the raw Printify upload id.
+create table if not exists personalizations (
+  id uuid primary key default gen_random_uuid(),
+  product_id text not null,
+  printify_upload_id text not null,
+  preview_url text not null,
+  configuration jsonb not null,
+  status text not null default 'draft', -- draft | attached_to_cart | purchased
+  created_at timestamptz not null default now(),
+  expires_at timestamptz not null default (now() + interval '7 days')
+);
+
+alter table personalizations enable row level security;

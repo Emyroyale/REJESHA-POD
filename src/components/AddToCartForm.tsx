@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart-context";
 import { formatPrice } from "@/lib/product-utils";
 import type { PrintifyVariant } from "@/lib/printify";
+import { getPersonalizationConfig } from "@/lib/personalization-config";
+import PersonalizeDesign, { type PersonalizeResult } from "@/components/PersonalizeDesign";
 
 export default function AddToCartForm({
   productId,
@@ -24,6 +26,9 @@ export default function AddToCartForm({
     (enabled.find((v) => v.is_default) ?? enabled[0])?.id
   );
   const [added, setAdded] = useState(false);
+  const [personalization, setPersonalization] = useState<PersonalizeResult | null>(null);
+
+  const personalizationConfig = getPersonalizationConfig(productId);
 
   const selected = enabled.find((v) => v.id === variantId);
 
@@ -33,6 +38,13 @@ export default function AddToCartForm({
 
   return (
     <div>
+      {personalizationConfig && (
+        <PersonalizeDesign
+          config={personalizationConfig}
+          onReady={setPersonalization}
+          onClear={() => setPersonalization(null)}
+        />
+      )}
       {enabled.length > 1 && (
         <div className="mb-6">
           <label className="mb-2 block text-xs font-semibold uppercase tracking-widest text-rejesha-gray">
@@ -65,8 +77,12 @@ export default function AddToCartForm({
             variantTitle: selected.title,
             price: selected.price,
             image,
+            personalization: personalization
+              ? { personalizationId: personalization.personalizationId, previewUrl: personalization.previewUrl }
+              : undefined,
           });
           setAdded(true);
+          setPersonalization(null);
         }}
         className="w-full border-2 border-rejesha-black bg-rejesha-black py-4 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-rejesha-red hover:border-rejesha-red"
       >

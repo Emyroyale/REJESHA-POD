@@ -10,6 +10,7 @@ import {
 } from "react";
 
 export type CartItem = {
+  id: string;
   productId: string;
   variantId: number;
   title: string;
@@ -17,13 +18,14 @@ export type CartItem = {
   price: number; // cents
   image: string;
   quantity: number;
+  personalization?: { personalizationId: string; previewUrl: string };
 };
 
 type CartContextValue = {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
-  removeItem: (productId: string, variantId: number) => void;
-  setQuantity: (productId: string, variantId: number, quantity: number) => void;
+  addItem: (item: Omit<CartItem, "id" | "quantity">, quantity?: number) => void;
+  removeItem: (id: string) => void;
+  setQuantity: (id: string, quantity: number) => void;
   clear: () => void;
   subtotal: number;
   count: number;
@@ -58,42 +60,38 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const addItem = useCallback<CartContextValue["addItem"]>(
     (item, quantity = 1) => {
       setItems((prev) => {
-        const existing = prev.find(
-          (i) => i.productId === item.productId && i.variantId === item.variantId
-        );
+        // Personalized lines never merge — each one is a distinct custom
+        // design, even if it shares a product+variant with another line.
+        const existing = item.personalization
+          ? undefined
+          : prev.find(
+              (i) =>
+                i.productId === item.productId &&
+                i.variantId === item.variantId &&
+                !i.personalization
+            );
         if (existing) {
           return prev.map((i) =>
             i === existing ? { ...i, quantity: i.quantity + quantity } : i
           );
         }
-        return [...prev, { ...item, quantity }];
+        return [...prev, { ...item, id: crypto.randomUUID(), quantity }];
       });
     },
     []
   );
 
-  const removeItem = useCallback((productId: string, variantId: number) => {
-    setItems((prev) =>
-      prev.filter((i) => !(i.productId === productId && i.variantId === variantId))
-    );
+  const removeItem = useCallback((id: string) => {
+    setItems((prev) => prev.filter((i) => i.id !== id));
   }, []);
 
-  const setQuantity = useCallback(
-    (productId: string, variantId: number, quantity: number) => {
-      setItems((prev) =>
-        quantity <= 0
-          ? prev.filter(
-              (i) => !(i.productId === productId && i.variantId === variantId)
-            )
-          : prev.map((i) =>
-              i.productId === productId && i.variantId === variantId
-                ? { ...i, quantity }
-                : i
-            )
-      );
-    },
-    []
-  );
+  const setQuantity = useCallback((id: string, quantity: number) => {
+    setItems((prev) =>
+      quantity <= 0
+        ? prev.filter((i) => i.id !== id)
+        : prev.map((i) => (i.id === id ? { ...i, quantity } : i))
+    );
+  }, []);
 
   const clear = useCallback(() => setItems([]), []);
 

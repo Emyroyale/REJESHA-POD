@@ -18,7 +18,14 @@ export default function CartPage() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            productId: item.productId,
+            variantId: item.variantId,
+            quantity: item.quantity,
+            personalizationId: item.personalization?.personalizationId,
+          })),
+        }),
       });
       const data = await res.json();
       if (!res.ok || !data.url) {
@@ -51,14 +58,11 @@ export default function CartPage() {
 
       <ul className="divide-y divide-rejesha-line border-y border-rejesha-line">
         {items.map((item) => (
-          <li
-            key={`${item.productId}-${item.variantId}`}
-            className="flex gap-4 py-6"
-          >
+          <li key={item.id} className="flex gap-4 py-6">
             <div className="relative h-24 w-24 shrink-0 bg-rejesha-line">
-              {item.image && (
+              {(item.personalization?.previewUrl || item.image) && (
                 <Image
-                  src={item.image}
+                  src={item.personalization?.previewUrl || item.image}
                   alt={item.title}
                   fill
                   className="object-cover"
@@ -73,6 +77,11 @@ export default function CartPage() {
                     {item.title}
                   </p>
                   <p className="text-xs text-rejesha-gray">{item.variantTitle}</p>
+                  {item.personalization && (
+                    <p className="text-xs font-semibold uppercase tracking-widest text-rejesha-red">
+                      Personalized
+                    </p>
+                  )}
                 </div>
                 <p className="text-sm font-semibold text-rejesha-red">
                   {formatPrice(item.price * item.quantity)}
@@ -83,17 +92,11 @@ export default function CartPage() {
                   type="number"
                   min={1}
                   value={item.quantity}
-                  onChange={(e) =>
-                    setQuantity(
-                      item.productId,
-                      item.variantId,
-                      Number(e.target.value)
-                    )
-                  }
+                  onChange={(e) => setQuantity(item.id, Number(e.target.value))}
                   className="w-16 border border-rejesha-black px-2 py-1 text-sm"
                 />
                 <button
-                  onClick={() => removeItem(item.productId, item.variantId)}
+                  onClick={() => removeItem(item.id)}
                   className="text-xs font-semibold uppercase tracking-widest text-rejesha-gray hover:text-rejesha-red"
                 >
                   Remove

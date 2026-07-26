@@ -14,6 +14,25 @@ export type PrintifyVariant = {
   is_default: boolean;
 };
 
+export type PrintifyPlaceholderImage = {
+  id: string;
+  x: number;
+  y: number;
+  scale: number;
+  angle: number;
+  src?: string;
+};
+
+export type PrintifyPlaceholder = {
+  position: string;
+  images: PrintifyPlaceholderImage[];
+};
+
+export type PrintifyPrintArea = {
+  variant_ids: number[];
+  placeholders: PrintifyPlaceholder[];
+};
+
 export type PrintifyProduct = {
   id: string;
   title: string;
@@ -22,6 +41,9 @@ export type PrintifyProduct = {
   variants: PrintifyVariant[];
   visible: boolean;
   tags: string[];
+  blueprint_id?: number;
+  print_provider_id?: number;
+  print_areas?: PrintifyPrintArea[];
 };
 
 type PrintifyProductsResponse = {
@@ -94,6 +116,83 @@ export type PrintifyShippingAddress = {
   city: string;
   zip: string;
 };
+
+export type PrintifyUpload = {
+  id: string;
+  file_name: string;
+  preview_url: string;
+  width: number;
+  height: number;
+};
+
+/** Uploads a flattened design PNG to Printify by base64 contents. */
+export async function uploadPrintifyImage(
+  fileName: string,
+  base64Contents: string
+): Promise<PrintifyUpload> {
+  return printifyFetch<PrintifyUpload>("/uploads/images.json", {
+    method: "POST",
+    body: JSON.stringify({ file_name: fileName, contents: base64Contents }),
+  });
+}
+
+/**
+ * Creates a hidden (visible:false) one-off product carrying a customer's
+ * personalized design, so it can be referenced by product_id/variant_id
+ * when placing a Printify order. Printify has no way to attach a custom
+ * image directly to an order line item — a real product must exist first.
+ */
+export async function createPersonalizedProduct(params: {
+  title: string;
+  blueprintId: number;
+  printProviderId: number;
+  variantId: number;
+  variantPrice: number;
+  placeholderPosition: string;
+  uploadId: string;
+}): Promise<{ productId: string; variantId: number }> {
+  const shopId = requireEnv("PRINTIFY_SHOP_ID");
+  const product = await printifyFetch<{ id: string; variants: PrintifyVariant[] }>(
+    `/shops/${shopId}/products.json`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        title: params.title,
+        blueprint_id: params.blueprintId,
+        print_provider_id: params.printProviderId,
+        visible: false,
+        variants: [
+          {
+            id: params.variantId,
+            price: params.variantPrice,
+            is_enabled: true,
+          },
+        ],
+        print_areas: [
+          {
+            variant_ids: [params.variantId],
+            placeholders: [
+              {
+                position: params.placeholderPosition,
+                images: [
+                  {
+                    id: params.uploadId,
+                    x: 0.5,
+                    y: 0.5,
+                    scale: 1,
+                    angle: 0,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }),
+    }
+  );
+
+  return { productId: product.id, variantId: params.variantId };
+}
 
 /** Submits a paid order to Printify for production and fulfillment. */
 export async function createPrintifyOrder(params: {

@@ -1,8 +1,29 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getStripe } from "@/lib/stripe";
-import { createPrintifyOrder, type PrintifyOrderLineItem } from "@/lib/printify";
+import {
+  createPersonalizedProduct,
+  createPrintifyOrder,
+  type PrintifyOrderLineItem,
+} from "@/lib/printify";
 import { getSupabaseAdmin } from "@/lib/supabase";
+
+type StoredLineItem = {
+  productId: string;
+  variantId: number;
+  quantity: number;
+  title: string;
+  price: number;
+  personalization?: {
+    personalizationId: string;
+    printifyUploadId: string;
+    placeholderPosition: string;
+    blueprintId: number;
+    printProviderId: number;
+    personalizedProductId?: string;
+    personalizedVariantId?: number;
+  };
+};
 
 export async function POST(request: Request) {
   const signature = request.headers.get("stripe-signature");
@@ -54,18 +75,48 @@ export async function POST(request: Request) {
   const [firstName, ...rest] = (shipping?.name ?? customerEmail).split(" ");
   const address = shipping?.address;
 
-  type StoredLineItem = {
-    productId: string;
-    variantId: number;
-    quantity: number;
-  };
+  // Mutable working copy — persisted back to Supabase after each
+  // personalized product is created, so a retried delivery (or a crash
+  // partway through) never creates a duplicate Printify product for a
+  // line item that already has one.
   const storedLineItems = order.line_items as StoredLineItem[];
+
+  for (let i = 0; i < storedLineItems.length; i++) {
+    const item = storedLineItems[i];
+    if (!item.personalization || item.personalization.personalizedProductId) {
+      continue;
+    }
+
+    const created = await createPersonalizedProduct({
+      title: `Custom – ${item.title}`,
+      blueprintId: item.personalization.blueprintId,
+      printProviderId: item.personalization.printProviderId,
+      variantId: item.variantId,
+      variantPrice: item.price,
+      placeholderPosition: item.personalization.placeholderPosition,
+      uploadId: item.personalization.printifyUploadId,
+    });
+
+    storedLineItems[i] = {
+      ...item,
+      personalization: {
+        ...item.personalization,
+        personalizedProductId: created.productId,
+        personalizedVariantId: created.variantId,
+      },
+    };
+
+    await supabase
+      .from("orders")
+      .update({ line_items: storedLineItems })
+      .eq("id", orderId);
+  }
 
   let printifyOrderId: string | null = null;
   if (address) {
     const printifyLineItems: PrintifyOrderLineItem[] = storedLineItems.map((i) => ({
-      product_id: i.productId,
-      variant_id: i.variantId,
+      product_id: i.personalization?.personalizedProductId ?? i.productId,
+      variant_id: i.personalization?.personalizedVariantId ?? i.variantId,
       quantity: i.quantity,
     }));
 
@@ -85,6 +136,16 @@ export async function POST(request: Request) {
       },
     });
     printifyOrderId = printifyOrder.id;
+
+    const personalizationIds = storedLineItems
+      .map((i) => i.personalization?.personalizationId)
+      .filter((id): id is string => Boolean(id));
+    if (personalizationIds.length > 0) {
+      await supabase
+        .from("personalizations")
+        .update({ status: "purchased" })
+        .in("id", personalizationIds);
+    }
   }
 
   await supabase
