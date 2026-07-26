@@ -17,7 +17,7 @@ export default async function ProductPage({
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-12">
+    <div className="mx-auto max-w-[1600px] py-8 lg:py-12">
       <ProductDetail product={product} />
     </div>
   );

@@ -67,8 +67,8 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
   }
 
   return (
-    <div className="grid gap-10 lg:grid-cols-2">
-      <div className="relative aspect-square bg-rejesha-line">
+    <div className="grid gap-0 lg:grid-cols-2 lg:gap-12">
+      <div className="relative h-[60vh] w-full lg:sticky lg:top-0 lg:h-screen">
         {image && (
           <Image
             src={image.src}
@@ -81,7 +81,7 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
         )}
       </div>
 
-      <div>
+      <div className="px-6 pt-8 lg:px-0 lg:pt-0">
         <h1 className="font-display text-2xl tracking-brand">{product.title}</h1>
 
         {personalizationConfig && (
@@ -140,7 +140,7 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
                     type="button"
                     disabled={!isAvailable}
                     onClick={() => setSizeId(s.id)}
-                    className={`min-w-12 border-2 px-3 py-2 text-sm font-semibold uppercase transition-colors ${
+                    className={`min-w-12 rounded-full border-2 px-4 py-2 text-sm font-semibold uppercase transition-colors ${
                       sizeId === s.id
                         ? "border-rejesha-black bg-rejesha-black text-white"
                         : "border-rejesha-line text-rejesha-black hover:border-rejesha-black"
@@ -178,7 +178,7 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
               setAdded(true);
               setPersonalization(null);
             }}
-            className="w-full border-2 border-rejesha-black bg-rejesha-black py-4 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-rejesha-red hover:border-rejesha-red"
+            className="w-full rounded-full bg-rejesha-black py-4 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-rejesha-red"
           >
             Add to Cart
           </button>
@@ -186,7 +186,7 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
           {added && (
             <button
               onClick={() => router.push("/cart")}
-              className="mt-3 w-full border-2 border-rejesha-red py-4 text-sm font-semibold uppercase tracking-widest text-rejesha-red transition-colors hover:bg-rejesha-red hover:text-white"
+              className="mt-3 w-full rounded-full border-2 border-rejesha-red py-4 text-sm font-semibold uppercase tracking-widest text-rejesha-red transition-colors hover:bg-rejesha-red hover:text-white"
             >
               View Cart
             </button>
@@ -215,28 +215,51 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
           />
         </div>
 
-        <details className="mt-6 group" open>
-          <summary className="cursor-pointer list-none text-xs font-semibold uppercase tracking-widest text-rejesha-black">
-            <span className="inline-flex items-center gap-2">
-              Description
-              <svg
-                viewBox="0 0 24 24"
-                className="h-3 w-3 transition-transform group-open:rotate-180"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </span>
-          </summary>
-          <div
-            className="mt-4 max-w-prose text-sm leading-relaxed text-rejesha-gray"
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          />
-        </details>
+        <div className="mt-6 divide-y divide-rejesha-line border-y border-rejesha-line pb-8">
+          <AccordionItem title="Description" defaultOpen>
+            <div
+              className="max-w-prose text-[15px] leading-relaxed text-rejesha-black"
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            />
+          </AccordionItem>
+          <AccordionItem title="Shipping & Returns">
+            <p className="max-w-prose text-[15px] leading-relaxed text-rejesha-black">
+              Every piece is made to order and printed just for you, so please allow
+              a few extra days for production before it ships. Reach out any time if
+              something isn&apos;t right &mdash; we&apos;ll make it right.
+            </p>
+          </AccordionItem>
+        </div>
       </div>
     </div>
+  );
+}
+
+function AccordionItem({
+  title,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  return (
+    <details className="group py-5" open={defaultOpen}>
+      <summary className="flex cursor-pointer list-none items-center justify-between text-xs font-semibold uppercase tracking-widest text-rejesha-black">
+        {title}
+        <svg
+          viewBox="0 0 24 24"
+          className="h-3.5 w-3.5 shrink-0 transition-transform group-open:rotate-180"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+      <div className="mt-4">{children}</div>
+    </details>
   );
 }
 
