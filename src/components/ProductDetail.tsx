@@ -140,7 +140,7 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
                     type="button"
                     disabled={!isAvailable}
                     onClick={() => setSizeId(s.id)}
-                    className={`min-w-12 rounded-full border-2 px-4 py-2 text-sm font-semibold uppercase transition-colors ${
+                    className={`min-w-12 rounded-xl border-2 px-4 py-2 text-sm font-semibold uppercase transition-colors ${
                       sizeId === s.id
                         ? "border-rejesha-black bg-rejesha-black text-white"
                         : "border-rejesha-line text-rejesha-black hover:border-rejesha-black"
@@ -178,7 +178,7 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
               setAdded(true);
               setPersonalization(null);
             }}
-            className="w-full rounded-full bg-rejesha-black py-4 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-rejesha-red"
+            className="w-full rounded-xl bg-rejesha-black py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-rejesha-red"
           >
             Add to Cart
           </button>
@@ -186,7 +186,7 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
           {added && (
             <button
               onClick={() => router.push("/cart")}
-              className="mt-3 w-full rounded-full border-2 border-rejesha-red py-4 text-sm font-semibold uppercase tracking-widest text-rejesha-red transition-colors hover:bg-rejesha-red hover:text-white"
+              className="mt-3 w-full rounded-xl border-2 border-rejesha-red py-4 text-sm font-bold uppercase tracking-wide text-rejesha-red transition-colors hover:bg-rejesha-red hover:text-white"
             >
               View Cart
             </button>
@@ -218,7 +218,7 @@ export default function ProductDetail({ product }: { product: PrintifyProduct })
         <div className="mt-6 divide-y divide-rejesha-line border-y border-rejesha-line pb-8">
           <AccordionItem title="Description" defaultOpen>
             <div
-              className="max-w-prose text-[15px] leading-relaxed text-rejesha-black"
+              className="max-w-prose text-base leading-relaxed text-rejesha-black/75"
               dangerouslySetInnerHTML={{ __html: product.description }}
             />
           </AccordionItem>
