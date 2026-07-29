@@ -2,41 +2,60 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0a0a0a;
+  --foreground: #111111;
 
-  --color-rejesha-black: #0a0a0a;
-  --color-rejesha-red: #c8102e;
-  --color-rejesha-green: #006600;
-  --color-rejesha-white: #ffffff;
-  --color-rejesha-gray: #6b6b6b;
-  --color-rejesha-line: #e5e5e5;
-  --color-rejesha-cream: #fdf6ec;
-  --color-rejesha-gold: #f0b429;
+  /* ── Core palette ── */
+  --color-rejesha-black:      #111111;
+  --color-rejesha-charcoal:   #242424;
+  --color-rejesha-cream:      #F7F3EA;
+  --color-rejesha-white:      #FFFFFF;
+  --color-rejesha-red:        #B51F2E;
+  --color-rejesha-green:      #176B45;
+  --color-rejesha-warm-sand:  #D9C7A3;
+  --color-rejesha-muted-gray: #737373;
+  --color-rejesha-border:     #DDD8CE;
+  --color-rejesha-gold:       #F0B429;
+
+  /* ── Legacy aliases (keep so old class names don't break) ── */
+  --color-rejesha-gray: #737373;
+  --color-rejesha-line: #DDD8CE;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-rejesha-black: var(--color-rejesha-black);
-  --color-rejesha-red: var(--color-rejesha-red);
-  --color-rejesha-green: var(--color-rejesha-green);
-  --color-rejesha-white: var(--color-rejesha-white);
-  --color-rejesha-gray: var(--color-rejesha-gray);
-  --color-rejesha-line: var(--color-rejesha-line);
-  --color-rejesha-cream: var(--color-rejesha-cream);
-  --color-rejesha-gold: var(--color-rejesha-gold);
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-poppins);
+  --color-background:          var(--background);
+  --color-foreground:          var(--foreground);
+  --color-rejesha-black:       var(--color-rejesha-black);
+  --color-rejesha-charcoal:    var(--color-rejesha-charcoal);
+  --color-rejesha-cream:       var(--color-rejesha-cream);
+  --color-rejesha-white:       var(--color-rejesha-white);
+  --color-rejesha-red:         var(--color-rejesha-red);
+  --color-rejesha-green:       var(--color-rejesha-green);
+  --color-rejesha-warm-sand:   var(--color-rejesha-warm-sand);
+  --color-rejesha-muted-gray:  var(--color-rejesha-muted-gray);
+  --color-rejesha-border:      var(--color-rejesha-border);
+  --color-rejesha-gold:        var(--color-rejesha-gold);
+  --color-rejesha-gray:        var(--color-rejesha-gray);
+  --color-rejesha-line:        var(--color-rejesha-line);
+
+  /* ── Font assignments ── */
+  --font-sans:    var(--font-inter);
+  --font-display: var(--font-archivo); /* Archivo Black — all main headings */
 }
 
+/* ─────────────────────────────────────────── */
+/* BASE                                        */
+/* ─────────────────────────────────────────── */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
+/* ─────────────────────────────────────────── */
+/* TYPOGRAPHY UTILITIES                        */
+/* ─────────────────────────────────────────── */
 .font-display {
-  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-family: var(--font-archivo), var(--font-sans), sans-serif;
 }
 
 .font-poppins {
@@ -59,9 +78,21 @@ body {
   letter-spacing: 0.18em;
 }
 
+/* ─────────────────────────────────────────── */
+/* FOCUS                                       */
+/* ─────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-rejesha-red);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─────────────────────────────────────────── */
+/* ANIMATIONS                                  */
+/* ─────────────────────────────────────────── */
 @keyframes rj-gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
@@ -70,38 +101,103 @@ body {
   animation: rj-gradient-shift 16s ease infinite;
 }
 
+/* ── Fade up ── */
 @keyframes rj-fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .rj-fade-up {
   opacity: 0;
-  animation: rj-fade-up 0.8s ease-out forwards;
+  animation: rj-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.rj-fade-up-delay-1 { animation-delay: 0.15s; }
-.rj-fade-up-delay-2 { animation-delay: 0.3s; }
-.rj-fade-up-delay-3 { animation-delay: 0.45s; }
+.rj-fade-up-delay-1 { animation-delay: 0.10s; }
+.rj-fade-up-delay-2 { animation-delay: 0.22s; }
+.rj-fade-up-delay-3 { animation-delay: 0.34s; }
+.rj-fade-up-delay-4 { animation-delay: 0.46s; }
 
+/* ── Line grow ── */
 @keyframes rj-line-grow {
   from { width: 0; }
-  to { width: 2.5rem; }
+  to   { width: 2.5rem; }
 }
 
 .rj-accent-line {
   animation: rj-line-grow 1s ease-out 0.6s both;
 }
 
+/* ── Slide in from right (cart drawer) ── */
+@keyframes rj-slide-in-right {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.rj-slide-in-right {
+  animation: rj-slide-in-right 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Slide in from left (mobile menu) ── */
+@keyframes rj-slide-in-left {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+.rj-slide-in-left {
+  animation: rj-slide-in-left 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Fade in overlay ── */
+@keyframes rj-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.rj-fade-in {
+  animation: rj-fade-in 0.25s ease forwards;
+}
+
+/* ── Announcement ticker ── */
+@keyframes rj-ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.rj-ticker {
+  animation: rj-ticker 30s linear infinite;
+  will-change: transform;
+}
+
+/* ── Word fade (hero rotating text) ── */
+.rj-word-fade {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* ─────────────────────────────────────────── */
+/* SCROLL SNAP (product gallery)              */
+/* ─────────────────────────────────────────── */
+.rj-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rj-snap-start {
+  scroll-snap-align: start;
+}
+
+/* ─────────────────────────────────────────── */
+/* REDUCED MOTION                              */
+/* ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .rj-hero-bg,
   .rj-fade-up,
-  .rj-accent-line {
-    animation: none;
-    opacity: 1;
+  .rj-accent-line,
+  .rj-ticker,
+  .rj-slide-in-right,
+  .rj-slide-in-left,
+  .rj-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
-}
-
-.rj-word-fade {
-  transition: opacity 0.4s ease, transform 0.4s ease;
 }

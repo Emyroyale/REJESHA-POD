@@ -33,3 +33,14 @@ create table if not exists personalizations (
 );
 
 alter table personalizations enable row level security;
+
+-- Newsletter subscribers
+-- Run: ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
+-- after creating this table in the Supabase SQL editor.
+create table if not exists newsletter_subscribers (
+  id uuid primary key default gen_random_uuid(),
+  email text not null unique,
+  subscribed_at timestamptz not null default now()
+);
+
+alter table newsletter_subscribers enable row level security;

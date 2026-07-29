@@ -9,10 +9,10 @@ type Slide = {
   headline: React.ReactNode;
   subhead: string;
   description: string;
-  ctaText: string;
-  ctaHref: string;
+  ctaPrimary: { text: string; href: string };
+  ctaSecondary?: { text: string; href: string };
   footnote: string;
-  image: StaticImageData;
+  image: StaticImageData | string;
   imageAlt: string;
 };
 
@@ -29,9 +29,9 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
       const swap = setTimeout(() => {
         setIndex((i) => (i + 1) % slides.length);
         setVisible(true);
-      }, 400);
+      }, 450);
       return () => clearTimeout(swap);
-    }, 6000);
+    }, 7000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -41,65 +41,117 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
     setTimeout(() => {
       setIndex(i);
       setVisible(true);
-    }, 400);
+    }, 450);
   }
 
   const slide = slides[index];
 
   return (
-    <section className="rj-hero-bg relative overflow-hidden border-b-2 border-rejesha-line bg-[linear-gradient(135deg,#fdf6ec_0%,#fdebd0_50%,#f5b942_100%)] px-6 py-16 sm:py-24">
+    <section
+      className="relative overflow-hidden border-b border-rejesha-border bg-rejesha-cream"
+      aria-label="Featured collections"
+    >
+      {/* Animated gradient background */}
+      <div className="rj-hero-bg absolute inset-0 bg-[linear-gradient(135deg,#F7F3EA_0%,#EDE5D0_40%,#D9C7A3_70%,#F7F3EA_100%)] opacity-70" />
+
+      {/* Flag-color accent stripe at very top */}
+      <div className="absolute left-0 right-0 top-0 flex h-0.5">
+        <div className="flex-1 bg-rejesha-black" />
+        <div className="flex-1 bg-rejesha-red" />
+        <div className="flex-1 bg-rejesha-white border-t border-rejesha-border" />
+        <div className="flex-1 bg-rejesha-red" />
+        <div className="flex-1 bg-rejesha-green" />
+      </div>
+
       <div
-        className={`mx-auto grid max-w-7xl items-center gap-12 transition-opacity duration-400 lg:grid-cols-2 ${
+        className={`relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 transition-opacity duration-450 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-16 ${
           visible ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div>
-          <span className="mb-4 inline-block border border-rejesha-green px-3 py-1 font-mono-brand text-[0.65rem] tracking-[0.25em] text-rejesha-green uppercase">
+        {/* ── Copy ── */}
+        <div className="order-2 lg:order-1">
+          {/* Eyebrow */}
+          <span className="inline-flex items-center gap-2 border border-rejesha-green/40 bg-rejesha-green/10 px-3 py-1 font-mono-brand text-[0.6rem] tracking-[0.25em] text-rejesha-green uppercase">
             {slide.eyebrow}
           </span>
-          <div className="mt-3 h-[3px] w-10 bg-[linear-gradient(90deg,#bb0000,#006600)]" />
-          <h1 className="font-editorial mt-4 max-w-xl text-4xl font-black leading-tight sm:text-6xl">
+
+          {/* Accent bar */}
+          <div className="rj-accent-line mt-4 h-[3px] bg-gradient-to-r from-rejesha-red to-rejesha-green" />
+
+          {/* Headline */}
+          <h1 className="font-editorial mt-5 max-w-xl text-4xl font-black leading-[1.1] text-rejesha-black sm:text-5xl lg:text-6xl">
             {slide.headline}
           </h1>
-          <p className="font-poppins mt-2 max-w-xl text-2xl font-semibold leading-tight text-rejesha-black/80 sm:text-3xl">
+
+          {/* Subhead */}
+          <p className="font-poppins mt-3 max-w-md text-xl font-semibold text-rejesha-black/70 sm:text-2xl">
             {slide.subhead}
           </p>
-          <p className="font-poppins mt-6 max-w-md text-sm text-rejesha-gray">
+
+          {/* Description */}
+          <p className="mt-5 max-w-md text-sm leading-relaxed text-rejesha-muted-gray">
             {slide.description}
           </p>
-          <Link
-            href={slide.ctaHref}
-            className="font-mono-brand mt-10 inline-block border-2 border-rejesha-red bg-rejesha-red px-10 py-3 text-xs tracking-widest text-rejesha-white uppercase transition-colors hover:border-rejesha-black hover:bg-rejesha-black"
-          >
-            {slide.ctaText}
-          </Link>
-          <p className="font-editorial mt-8 text-lg text-rejesha-black/70 italic">
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href={slide.ctaPrimary.href}
+              className="bg-rejesha-red px-8 py-3.5 font-mono-brand text-xs tracking-widest text-white uppercase transition-colors hover:bg-rejesha-black"
+            >
+              {slide.ctaPrimary.text}
+            </Link>
+            {slide.ctaSecondary && (
+              <Link
+                href={slide.ctaSecondary.href}
+                className="border-2 border-rejesha-black bg-transparent px-8 py-3.5 font-mono-brand text-xs tracking-widest text-rejesha-black uppercase transition-colors hover:bg-rejesha-black hover:text-white"
+              >
+                {slide.ctaSecondary.text}
+              </Link>
+            )}
+          </div>
+
+          {/* Footnote */}
+          <p className="font-editorial mt-8 text-base italic text-rejesha-black/50">
             {slide.footnote}
           </p>
         </div>
 
-        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm border border-rejesha-line/60 bg-rejesha-white shadow-[0_8px_40px_rgba(0,0,0,0.1)] lg:aspect-square">
-          <Image
-            src={slide.image}
-            alt={slide.imageAlt}
-            fill
-            priority
-            className="object-cover"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
+        {/* ── Image ── */}
+        <div className="order-1 lg:order-2">
+          <div className="relative aspect-[4/3] w-full overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] lg:aspect-square">
+            <Image
+              src={slide.image}
+              alt={slide.imageAlt}
+              fill
+              priority
+              className="object-cover"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
+            {/* Subtle frame */}
+            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5" />
+          </div>
         </div>
       </div>
 
+      {/* Slide indicators */}
       {slides.length > 1 && (
-        <div className="relative z-10 mx-auto mt-10 flex max-w-7xl items-center justify-center gap-2 lg:justify-start">
+        <div
+          className="relative z-10 mx-auto flex max-w-7xl items-center gap-2 px-6 pb-8 lg:justify-start"
+          role="group"
+          aria-label="Slide navigation"
+        >
           {slides.map((_, i) => (
             <button
               key={i}
               type="button"
-              aria-label={`Show slide ${i + 1}`}
+              aria-label={`Go to slide ${i + 1}`}
+              aria-current={i === index ? "true" : undefined}
               onClick={() => goTo(i)}
-              className={`h-1.5 rounded-full transition-all ${
-                i === index ? "w-6 bg-rejesha-red" : "w-1.5 bg-rejesha-black/25"
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === index
+                  ? "w-8 bg-rejesha-red"
+                  : "w-1.5 bg-rejesha-black/20 hover:bg-rejesha-black/40"
               }`}
             />
           ))}
