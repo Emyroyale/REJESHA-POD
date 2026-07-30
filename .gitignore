@@ -40,3 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 __pycache__/
+
+# Large design files (not needed in repo)
+"Untitled design.png"
+Untitled*.png
+*.webp
+!public/**/*.webp
+
